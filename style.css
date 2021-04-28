@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 16px;
+  font-family:  Verdana, sans-serif;
+}
+
+header {
+  background-color: rgb(211, 210, 210);
+}
+
+header h1 {
+  color: #333;
+}
+
+#main {
+  max-width: 1000px;
+  background-color: #fff;
+  transition: 1s ease;
+}
+
+#main.hidden {
+  opacity: 0.3;
+  visibility: hidden;
+}
+
+
+
+.container {
+  width: 1000px;
+  margin: auto;
+  border: 1px solid rgb(202, 199, 199);
+  padding: 100px;
+  text-align: center; 
+  opacity: 0;
+  transform: translateY(150px);
+  transition: 1s ease;
+}
+
+.container.show {
+  transform: translateY(-180px);
+  opacity: 1;
+  background-color:#fff;
+}
+
+#app h1 {
+  font-size: 22px;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 0;
+}
+
+#app li {
+  line-height: 1.5;
+}
+
+#app input[type="text"] {
+  padding: 2px;
+}
+
+.command {
+  font-size: 14px;
+  cursor: pointer;
+  color:#08c;
+}
+
+#app ul {
+  padding: 0;
+  list-style: none;
+}
+
+#app li > span.done {
+  text-decoration: line-through;
+  color: #bbb;
+}
+
+.info {
+  color: #bbb;
+  font-size: 14px;
+  font-weight: normal;
+}

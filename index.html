@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+  <header class="p-3">
+    <h1 class="col-6 offset-3">TODOリスト作ってみた avec Vue.js</h1>
+  </header>
+
+  <main id="main" class="col-6 offset-3 mt-5">
+    <section>
+      <h1 class="text-center">試しに使ってみる</h1>
+      <p class="text-center">使い方はシンプルで今日必要なものや、することを入力して終わったらチェックボックスにチュックをつけるか、項目自体を消してください。</p>
+      <button type="button" id="btn" class="btn btn-primary col-md-2 offset-md-5">TODOリスト</button>
+    </section>
+  </main>
+
+<div id="app" class="container">
+  <h1>My todos
+    <span class="info">{{ remaining }}/{{ todos.length }}</span>
+  </h1>
+  <ul v-if="todos.length">
+    <li v-for="(todo, index) in todos">
+      <input type="checkbox" v-model="todo.isDone">
+     <span :class="{done: todo.isDone}">
+      {{ todo.title }}
+    </span>
+      <span @click="deleteItem(index)" class="command">[x]</span>
+    </li>
+  </ul>
+  <ul v-else>
+    <li>Nothing to do, felicitation!</li>
+  </ul>
+  <form v-on:submit.prevent="addItem">
+    <input type="text" v-model="newItem">
+    <input type="submit" value="Add">
+  </form>
+</div>
+  
+ <script>
+   var app = new Vue({
+  el:"#app",
+  data: {
+    newItem: '',
+    //  todos: [{
+    //     title: 'task1',
+    //     isDone: false
+    //  }, {
+    //    title:  'task2',
+    //    isDone: false
+    //  }, {
+    //    title:  'task3',
+    //    isDone: true
+    //  }]
+    todos: []
+  },
+  methods: {
+    addItem: function() {
+      var item = {
+        title: this.newItem,
+        isDone: false
+      };
+      this.todos.push(item);
+      this.newItem = '';
+    },
+    deleteItem: function(index) {
+      if(confirm('Are you sure ?')) {
+        this.todos.splice(index,1);
+      }
+    }
+  },
+  computed: {
+    remaining: function() {
+      var items = this.todos.filter(function(todo) {
+        return !todo.isDone;
+      });
+      return items.length;
+    }
+  }
+
+})
+const btn = document.getElementById('btn');
+const openUp = document.querySelector('.container');
+const hidden = document.getElementById('main');
+
+btn.addEventListener('click', function(){
+  openUp.classList.add('show');
+  hidden.classList.add('hidden');
+});
+ </script>
+
+
+
+  
+
+</body>
+</html>
